@@ -48,7 +48,7 @@ endif # HEXAGON_LIBS
 
 # If ANDROID_TYPES is not set assume __ANDROID_TYPES_SLIM__
 ifeq ($(ANDROID_TYPES),)
-	ANDROID_TYPES := -D__ANDROID_TYPES_SLIM__
+	ANDROID_TYPES := -D__ANDROID_TYPES_FULL__
 endif
 
 # Try to figure out the host system
@@ -260,7 +260,7 @@ ifeq ($(TARGET),ANDROID)
 	else
 		ANDROID_HOST_OS_ARCH := $(ANDROID_HOST_OS_ARCH)-$(HOST_ARCH)
 	endif
-    
+
 	ifndef ANDROID_ARCH
 		ANDROID_ARCH := armeabi-v7a
 	endif
@@ -307,7 +307,7 @@ ifeq ($(TARGET),ANDROID)
 		BIN_PREFIX := x86_64-linux-android
 		MARCH_OPTION :=
 	endif
-    
+
 	ifndef NDK_ROOT
     $(error "NDK_ROOT is not defined.")
 	endif
@@ -536,7 +536,7 @@ ifeq ($(TARGET),IOS)
 		-arch i386 \
 		-mno-sse \
 		-fembed-bitcode \
-		-D__thread=thread_local \
+		-D__thread= \
 		-DUSE_GEMM_FOR_CONV \
 		-Wno-c++11-narrowing \
 		-DTF_LEAN_BINARY \
